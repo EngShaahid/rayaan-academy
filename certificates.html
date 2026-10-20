@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Certificates | Rayaan Academy</title>
+  <meta name="description" content="Your Rayaan Academy certificates and completion status.">
+  <meta name="theme-color" content="#B5031D">
+  <link rel="icon" type="image/png" href="assets/icons/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Tailwind Play CDN (development only, see js/tailwind-config.js) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/tailwind-config.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/storage.js"></script>
+</head>
+<body data-page="certificates">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="ra-app">
+    <div id="app-sidebar"></div>
+    <div class="ra-app-main">
+      <div id="app-topbar"></div>
+      <main id="main" class="ra-app-content">
+        <h1 class="h3 mb-1">Certificates</h1>
+        <p class="text-muted-ra mb-4">Complete every lesson in a course to unlock its certificate. Certificates in this demo are for display only.</p>
+        <section class="mb-5" aria-labelledby="earnedTitle">
+          <h2 class="h5 mb-3" id="earnedTitle">Earned certificates</h2>
+          <div class="row g-4" id="earnedList"></div>
+        </section>
+        <section aria-labelledby="progressTitle">
+          <h2 class="h5 mb-3" id="progressTitle">In progress</h2>
+          <div class="row g-4" id="progressList"></div>
+        </section>
+      </main>
+
+      <div class="modal fade" id="certModal" tabindex="-1" aria-labelledby="certModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content ra-modal">
+            <div class="modal-header"><h2 class="modal-title h5" id="certModalTitle">Certificate</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+            <div class="modal-body"><div id="printArea"></div></div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-ra-ghost" id="copyCertId"><i class="bi bi-clipboard" aria-hidden="true"></i> Copy certificate ID</button>
+              <button type="button" class="btn btn-ra-primary" id="printCert"><i class="bi bi-printer" aria-hidden="true"></i> Print or save as PDF</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/courses-data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/pages.js"></script>
+</body>
+</html>

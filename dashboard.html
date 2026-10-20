@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard | Rayaan Academy</title>
+  <meta name="description" content="Your Rayaan Academy learning dashboard.">
+  <meta name="theme-color" content="#B5031D">
+  <link rel="icon" type="image/png" href="assets/icons/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Tailwind Play CDN (development only, see js/tailwind-config.js) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/tailwind-config.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/storage.js"></script>
+</head>
+<body data-page="dashboard">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="ra-app">
+    <div id="app-sidebar"></div>
+    <div class="ra-app-main">
+      <div id="app-topbar"></div>
+      <main id="main" class="ra-app-content">
+        <section class="ra-welcome mb-4" aria-labelledby="welcomeTitle">
+          <div class="row g-3 align-items-center position-relative z-1">
+            <div class="col-md-8">
+              <p class="mb-1 small text-uppercase fw-semibold tw-tracking-widest" id="welcomeDate"></p>
+              <h1 id="welcomeTitle">Welcome back</h1>
+              <p class="mb-0" id="welcomeText">Keep going. Small daily progress adds up.</p>
+            </div>
+            <div class="col-md-4 text-md-end">
+              <a href="courses.html" class="btn btn-ra-light" id="welcomeCta">Continue learning <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </section>
+
+        <div class="row g-3 mb-4" id="statCards" aria-label="Learning statistics"></div>
+
+        <div class="row g-4 mb-4">
+          <div class="col-xl-8">
+            <section class="ra-panel" aria-labelledby="continueTitle">
+              <div class="ra-panel-head"><h2 id="continueTitle">Continue learning</h2><a href="#my-courses">All my courses</a></div>
+              <div id="continueList"></div>
+            </section>
+          </div>
+          <div class="col-xl-4">
+            <section class="ra-panel text-center" aria-labelledby="overallTitle">
+              <div class="ra-panel-head justify-content-center"><h2 id="overallTitle">Overall progress</h2></div>
+              <div id="overallRing"></div>
+              <p class="small text-muted-ra mt-3 mb-0" id="overallText"></p>
+            </section>
+          </div>
+        </div>
+
+        <div class="row g-4 mb-4">
+          <div class="col-xl-8">
+            <section class="ra-panel" aria-labelledby="weekTitle">
+              <div class="ra-panel-head"><h2 id="weekTitle">Weekly learning activity</h2><span class="small text-muted-ra" id="weekTotal"></span></div>
+              <div id="weekChart" role="img" aria-label="Minutes learned per day over the last seven days"></div>
+            </section>
+          </div>
+          <div class="col-xl-4">
+            <section class="ra-panel" aria-labelledby="streakTitle">
+              <div class="ra-panel-head"><h2 id="streakTitle">Learning streak</h2><i class="bi bi-fire text-accent fs-4" aria-hidden="true"></i></div>
+              <div id="streakBox"></div>
+            </section>
+          </div>
+        </div>
+
+        <section class="ra-panel mb-4" id="my-courses" aria-labelledby="myCoursesTitle">
+          <div class="ra-panel-head">
+            <h2 id="myCoursesTitle">My courses</h2>
+            <div class="ra-view-toggle" role="group" aria-label="Filter my courses">
+              <button type="button" class="active is-text" data-mc="progress" aria-pressed="true">In progress</button>
+              <button type="button" class="is-text" data-mc="completed" aria-pressed="false">Completed</button>
+              <button type="button" class="is-text" data-mc="all" aria-pressed="false">All</button>
+            </div>
+          </div>
+          <div class="row g-4" id="myCourses"></div>
+        </section>
+
+        <div class="row g-4 mb-4">
+          <div class="col-lg-6">
+            <section class="ra-panel" aria-labelledby="badgeTitle">
+              <div class="ra-panel-head"><h2 id="badgeTitle">Achievements</h2><span class="small text-muted-ra" id="badgeCount"></span></div>
+              <div class="ra-achievements" id="achievements"></div>
+            </section>
+          </div>
+          <div class="col-lg-6">
+            <section class="ra-panel" aria-labelledby="goalTitle">
+              <div class="ra-panel-head"><h2 id="goalTitle">Upcoming learning goals</h2></div>
+              <form id="goalForm" class="d-flex gap-2 mb-2" novalidate>
+                <label for="goalInput" class="visually-hidden">New goal</label>
+                <input type="text" id="goalInput" class="form-control" placeholder="Add a goal, for example finish Module 2" maxlength="80">
+                <button type="submit" class="btn btn-ra-primary" aria-label="Add goal"><i class="bi bi-plus-lg" aria-hidden="true"></i></button>
+              </form>
+              <div id="goalList"></div>
+            </section>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <section class="ra-panel" id="saved" aria-labelledby="savedTitle">
+              <div class="ra-panel-head"><h2 id="savedTitle">Saved courses</h2><a href="courses.html">Browse</a></div>
+              <div id="savedList"></div>
+            </section>
+          </div>
+          <div class="col-lg-4">
+            <section class="ra-panel" aria-labelledby="recTitle">
+              <div class="ra-panel-head"><h2 id="recTitle">Recommended for you</h2></div>
+              <div id="recList"></div>
+            </section>
+          </div>
+          <div class="col-lg-4">
+            <section class="ra-panel" aria-labelledby="actTitle">
+              <div class="ra-panel-head"><h2 id="actTitle">Recent activity</h2></div>
+              <ul class="ra-activity" id="activityList"></ul>
+            </section>
+          </div>
+        </div>
+
+        <section class="ra-panel mt-4 d-flex flex-wrap align-items-center gap-3" aria-labelledby="certQuickTitle">
+          <span class="ra-feature-icon mb-0"><i class="bi bi-award" aria-hidden="true"></i></span>
+          <div class="flex-grow-1">
+            <h2 class="h5 mb-1" id="certQuickTitle">Certificates</h2>
+            <p class="mb-0 text-muted-ra small" id="certQuickText"></p>
+          </div>
+          <a href="certificates.html" class="btn btn-ra-outline">View certificates</a>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/courses-data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

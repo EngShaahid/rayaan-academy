@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Explore Courses | Rayaan Academy</title>
+  <meta name="description" content="Browse and filter Rayaan Academy courses by category, level, duration and price.">
+  <meta name="theme-color" content="#B5031D">
+  <link rel="icon" type="image/png" href="assets/icons/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Tailwind Play CDN (development only, see js/tailwind-config.js) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/tailwind-config.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/storage.js"></script>
+</head>
+<body data-page="courses">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div id="site-header"></div>
+
+  <main id="main">
+    <section class="ra-page-hero">
+      <div class="container">
+        <nav aria-label="Breadcrumb"><ol class="breadcrumb ra-breadcrumb"><li class="breadcrumb-item"><a href="index.html">Home</a></li><li class="breadcrumb-item active" aria-current="page">Explore Courses</li></ol></nav>
+        <h1>Explore courses</h1>
+        <p class="ra-section-lead mb-0">Search, filter and sort every Rayaan Academy course to find the right next step for you.</p>
+      </div>
+    </section>
+
+    <section class="ra-section-sm">
+      <div class="container">
+        <div class="row g-4">
+          <!-- Filters -->
+          <aside class="col-lg-3" aria-label="Course filters">
+            <div class="offcanvas-lg offcanvas-start ra-filter-offcanvas" tabindex="-1" id="filterPanel" aria-labelledby="filterPanelLabel">
+              <div class="offcanvas-header">
+                <h2 class="offcanvas-title h5" id="filterPanelLabel">Filters</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#filterPanel" aria-label="Close filters"></button>
+              </div>
+              <div class="offcanvas-body d-block">
+                <form class="ra-filter-panel w-100" id="filterForm" novalidate>
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2 class="h6 mb-0 d-none d-lg-block">Filters</h2>
+                    <button type="button" class="btn btn-sm btn-ra-ghost" data-clear-filters>Clear all</button>
+                  </div>
+                  <fieldset class="ra-filter-group">
+                    <legend class="visually-hidden">Category</legend>
+                    <h3 aria-hidden="true">Category</h3>
+                    <div id="categoryFilters"></div>
+                  </fieldset>
+                  <fieldset class="ra-filter-group">
+                    <legend class="visually-hidden">Difficulty</legend>
+                    <h3 aria-hidden="true">Difficulty</h3>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" name="level" value="Beginner" id="lvBeg"><label class="form-check-label" for="lvBeg">Beginner</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" name="level" value="Intermediate" id="lvInt"><label class="form-check-label" for="lvInt">Intermediate</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" name="level" value="Advanced" id="lvAdv"><label class="form-check-label" for="lvAdv">Advanced</label></div>
+                  </fieldset>
+                  <fieldset class="ra-filter-group">
+                    <legend class="visually-hidden">Duration</legend>
+                    <h3 aria-hidden="true">Duration</h3>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="duration" value="any" id="duAny" checked><label class="form-check-label" for="duAny">Any length</label></div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="duration" value="short" id="duShort"><label class="form-check-label" for="duShort">Under 15 hours</label></div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="duration" value="medium" id="duMed"><label class="form-check-label" for="duMed">15 to 30 hours</label></div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="duration" value="long" id="duLong"><label class="form-check-label" for="duLong">Over 30 hours</label></div>
+                  </fieldset>
+                  <fieldset class="ra-filter-group">
+                    <legend class="visually-hidden">Price</legend>
+                    <h3 aria-hidden="true">Price (demo)</h3>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="price" value="all" id="prAll" checked><label class="form-check-label" for="prAll">All courses</label></div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="price" value="Free" id="prFree"><label class="form-check-label" for="prFree">Free</label></div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="price" value="Paid" id="prPaid"><label class="form-check-label" for="prPaid">Paid</label></div>
+                  </fieldset>
+                  <button type="button" class="btn btn-ra-primary w-100 mt-4 d-lg-none" data-bs-dismiss="offcanvas" data-bs-target="#filterPanel">Show results</button>
+                </form>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Results -->
+          <div class="col-lg-9">
+            <div class="ra-toolbar">
+              <div class="ra-search-field flex-grow-1" role="search">
+                <i class="bi bi-search" aria-hidden="true"></i>
+                <label for="courseSearch" class="visually-hidden">Search courses</label>
+                <input type="search" id="courseSearch" class="form-control" placeholder="Search by title, skill or keyword" autocomplete="off">
+              </div>
+              <button class="btn btn-ra-ghost d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#filterPanel" aria-controls="filterPanel"><i class="bi bi-funnel" aria-hidden="true"></i> Filters <span class="ra-badge" id="filterCount" hidden>0</span></button>
+              <div>
+                <label for="courseSort" class="visually-hidden">Sort courses</label>
+                <select id="courseSort" class="form-select">
+                  <option value="popular">Most popular</option>
+                  <option value="rating">Highest rated</option>
+                  <option value="title">Title A to Z</option>
+                  <option value="duration-asc">Shortest first</option>
+                  <option value="duration-desc">Longest first</option>
+                </select>
+              </div>
+              <div class="ra-view-toggle" role="group" aria-label="Layout">
+                <button type="button" data-view="grid" aria-label="Grid view" aria-pressed="true" class="active"><i class="bi bi-grid-3x3-gap" aria-hidden="true"></i></button>
+                <button type="button" data-view="list" aria-label="List view" aria-pressed="false"><i class="bi bi-list-ul" aria-hidden="true"></i></button>
+              </div>
+            </div>
+            <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+              <p class="mb-0 me-2" id="courseCount" aria-live="polite">Loading courses</p>
+              <div class="d-flex flex-wrap gap-2" id="activeChips"></div>
+            </div>
+            <div class="row g-4" id="courseGrid">
+              <div class="col-md-6 col-xl-4"><div class="ra-skeleton" aria-hidden="true"></div></div>
+              <div class="col-md-6 col-xl-4"><div class="ra-skeleton" aria-hidden="true"></div></div>
+              <div class="col-md-6 col-xl-4 d-none d-xl-block"><div class="ra-skeleton" aria-hidden="true"></div></div>
+            </div>
+            <div class="text-center mt-5">
+              <button type="button" class="btn btn-ra-outline" id="loadMore" hidden>Load more courses</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/courses-data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/courses.js"></script>
+</body>
+</html>
